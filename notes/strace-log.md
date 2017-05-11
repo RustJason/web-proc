@@ -1,3 +1,4 @@
+```
 ".", 1)                         = 1
 write(2, ".", 1)                        = 1
 read(0, "/", 1)                         = 1
@@ -141,3 +142,4 @@ rt_sigaction(SIGWINCH, {0x4ac3f0, [], SA_RESTORER|SA_RESTART, 0x7fa5496b64b0}, {
 write(2, "\33]0;jason@jason-VirtualBox: ~/te"..., 92) = 92
 read(0, ^@"\0", 1)                        = 1
 read(0,
+```
