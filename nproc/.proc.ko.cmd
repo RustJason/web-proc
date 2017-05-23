@@ -1,0 +1,1 @@
+cmd_/home/jason/rust/web-proc/kernel/proc.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/jason/rust/web-proc/kernel/proc.ko /home/jason/rust/web-proc/kernel/proc.o /home/jason/rust/web-proc/kernel/proc.mod.o ;  true
