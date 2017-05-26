@@ -1,4 +1,4 @@
-proc_sysctl.o: /home/jason/rust/web-proc/kernel/proc_sysctl.c \
+proc_sysctl.o: /home/jason/rust/web-proc/nproc/proc_sysctl.c \
  include/linux/kconfig.h include/generated/autoconf.h \
  include/linux/init.h include/linux/compiler.h \
  include/linux/compiler-gcc.h include/uapi/linux/types.h \
@@ -204,7 +204,7 @@ proc_sysctl.o: /home/jason/rust/web-proc/kernel/proc_sysctl.c \
  include/linux/sysfs.h include/linux/kernfs.h include/linux/kobject_ns.h \
  include/linux/kref.h include/linux/moduleparam.h include/linux/extable.h \
  include/linux/rbtree_latch.h arch/x86/include/asm/module.h \
- include/asm-generic/module.h /home/jason/rust/web-proc/kernel/internal.h \
+ include/asm-generic/module.h /home/jason/rust/web-proc/nproc/internal.h \
  include/linux/proc_ns.h include/linux/ns_common.h \
  include/linux/binfmts.h arch/x86/include/asm/exec.h \
  include/uapi/linux/binfmts.h

@@ -1,4 +1,4 @@
-generic.o: /home/jason/rust/web-proc/kernel/generic.c \
+generic.o: /home/jason/rust/web-proc/nproc/generic.c \
  include/linux/kconfig.h include/generated/autoconf.h \
  include/linux/errno.h include/uapi/linux/errno.h \
  arch/x86/include/uapi/asm/errno.h include/uapi/asm-generic/errno.h \
@@ -203,6 +203,6 @@ generic.o: /home/jason/rust/web-proc/kernel/generic.c \
  arch/x86/include/asm/uaccess.h include/linux/kasan-checks.h \
  arch/x86/include/asm/smap.h arch/x86/include/asm/extable.h \
  arch/x86/include/asm/uaccess_64.h \
- /home/jason/rust/web-proc/kernel/internal.h include/linux/proc_ns.h \
+ /home/jason/rust/web-proc/nproc/internal.h include/linux/proc_ns.h \
  include/linux/ns_common.h include/linux/binfmts.h \
  arch/x86/include/asm/exec.h include/uapi/linux/binfmts.h

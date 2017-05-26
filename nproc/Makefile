@@ -2,9 +2,9 @@
 # Makefile for the Linux proc filesystem routines.
 #
 
-obj-m   += myproc.o
+obj-m   += proc.o
 
-myproc-objs += proc.o /path/lib.a
+#myproc-objs += proc.o #/path/lib.a
 
 
 CFLAGS_task_mmu.o	+= $(call cc-option,-Wno-override-init,)

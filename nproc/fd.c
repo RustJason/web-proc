@@ -16,6 +16,53 @@
 #include "internal.h"
 #include "fd.h"
 
+
+static struct fdtable *close_files(struct files_struct * files)
+{
+        /*
+         * It is safe to dereference the fd table without RCU or
+         * ->file_lock because this is the last reference to the
+         * files structure.
+         */
+        struct fdtable *fdt = rcu_dereference_raw(files->fdt);
+        unsigned int i, j = 0;
+
+        for (;;) {
+                unsigned long set;
+                i = j * BITS_PER_LONG;
+                if (i >= fdt->max_fds)
+                        break;
+                set = fdt->open_fds[j++];
+                while (set) {
+                        if (set & 1) {
+                                struct file * file = xchg(&fdt->fd[i], NULL);
+                                if (file) {
+                                        filp_close(file, files);
+                                        cond_resched_rcu_qs();
+                                }
+                        }
+                        i++;
+                        set >>= 1;
+                }
+        }
+
+        return fdt;
+}
+
+
+void put_files_struct(struct files_struct *files) {
+	if (atomic_dec_and_test(&files->count)) {
+		struct fdtable *fdt = close_files(files);
+		
+		if (fdt != &files->fdtab) {
+			kvfree(fdt->fd);
+			kvfree(fdt->open_fds);
+			kfree(fdt);
+		}
+		kmem_cache_free(files_cachep, files);
+	}
+}
+
 static int seq_show(struct seq_file *m, void *v)
 {
 	struct files_struct *files = NULL;

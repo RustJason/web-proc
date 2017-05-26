@@ -1696,6 +1696,7 @@ struct inode *proc_pid_make_inode(struct super_block * sb, struct task_struct *t
 		inode->i_gid = cred->egid;
 		rcu_read_unlock();
 	}
+	//call_void_hook(task_to_inode, task, inode);
 	security_task_to_inode(task, inode);
 
 out:

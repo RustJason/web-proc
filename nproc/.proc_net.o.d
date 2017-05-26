@@ -1,4 +1,4 @@
-proc_net.o: /home/jason/rust/web-proc/kernel/proc_net.c \
+proc_net.o: /home/jason/rust/web-proc/nproc/proc_net.c \
  include/linux/kconfig.h include/generated/autoconf.h \
  arch/x86/include/asm/uaccess.h include/linux/errno.h \
  include/uapi/linux/errno.h arch/x86/include/uapi/asm/errno.h \
@@ -248,6 +248,6 @@ proc_net.o: /home/jason/rust/web-proc/kernel/proc_net.c \
  include/linux/swiotlb.h include/linux/dma-contiguous.h \
  include/linux/netdev_features.h include/linux/splice.h \
  include/linux/pipe_fs_i.h include/uapi/linux/if_packet.h \
- include/linux/seq_file_net.h /home/jason/rust/web-proc/kernel/internal.h \
+ include/linux/seq_file_net.h /home/jason/rust/web-proc/nproc/internal.h \
  include/linux/proc_ns.h include/linux/binfmts.h \
  arch/x86/include/asm/exec.h include/uapi/linux/binfmts.h

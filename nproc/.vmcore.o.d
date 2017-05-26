@@ -1,4 +1,4 @@
-vmcore.o: /home/jason/rust/web-proc/kernel/vmcore.c \
+vmcore.o: /home/jason/rust/web-proc/nproc/vmcore.c \
  include/linux/kconfig.h include/generated/autoconf.h include/linux/mm.h \
  include/linux/errno.h include/uapi/linux/errno.h \
  arch/x86/include/uapi/asm/errno.h include/uapi/asm-generic/errno.h \
@@ -228,6 +228,6 @@ vmcore.o: /home/jason/rust/web-proc/kernel/vmcore.c \
  arch/x86/include/asm/kexec.h include/linux/proc_fs.h \
  include/linux/vmalloc.h include/linux/pagemap.h \
  include/linux/hugetlb_inline.h \
- /home/jason/rust/web-proc/kernel/internal.h include/linux/proc_ns.h \
+ /home/jason/rust/web-proc/nproc/internal.h include/linux/proc_ns.h \
  include/linux/binfmts.h arch/x86/include/asm/exec.h \
  include/uapi/linux/binfmts.h

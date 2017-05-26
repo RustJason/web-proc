@@ -479,7 +479,7 @@ static int do_task_stat(struct seq_file *m, struct pid_namespace *ns,
 
 	/* scale priority and nice values from timeslices to -20..20 */
 	/* to make it look like a "normal" Unix priority/nice value  */
-	priority = task_prio(task);
+	priority = task->prio - MAX_RT_PRIO; //task_prio(task);
 	nice = task_nice(task);
 
 	/* convert nsec -> ticks */

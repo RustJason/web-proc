@@ -32,6 +32,7 @@ __attribute__((section("__versions"))) = {
 	{ 0x6bf1c17f, __VMLINUX_SYMBOL_STR(pv_lock_ops) },
 	{ 0x349cba85, __VMLINUX_SYMBOL_STR(strchr) },
 	{ 0x2a3b3e6, __VMLINUX_SYMBOL_STR(single_open) },
+	{ 0x7aa1756e, __VMLINUX_SYMBOL_STR(kvfree) },
 	{ 0xd21bc6d4, __VMLINUX_SYMBOL_STR(get_task_pid) },
 	{ 0x754d539c, __VMLINUX_SYMBOL_STR(strlen) },
 	{ 0x39461d6a, __VMLINUX_SYMBOL_STR(in_egroup_p) },
@@ -61,6 +62,7 @@ __attribute__((section("__versions"))) = {
 	{ 0xee92292c, __VMLINUX_SYMBOL_STR(task_tgid_nr_ns) },
 	{ 0x44e9a829, __VMLINUX_SYMBOL_STR(match_token) },
 	{ 0xee6face7, __VMLINUX_SYMBOL_STR(put_zone_device_page) },
+	{ 0x69e44691, __VMLINUX_SYMBOL_STR(filp_close) },
 	{ 0x56eeee52, __VMLINUX_SYMBOL_STR(init_user_ns) },
 	{ 0xe75a24df, __VMLINUX_SYMBOL_STR(down_write_killable) },
 	{ 0x4cc9e598, __VMLINUX_SYMBOL_STR(mutex_unlock) },
@@ -213,6 +215,7 @@ __attribute__((section("__versions"))) = {
 	{ 0xb0e602eb, __VMLINUX_SYMBOL_STR(memmove) },
 	{ 0xe7d4daac, __VMLINUX_SYMBOL_STR(seq_list_next) },
 	{ 0x77bc13a0, __VMLINUX_SYMBOL_STR(strim) },
+	{ 0xcd974f00, __VMLINUX_SYMBOL_STR(rcu_all_qs) },
 	{ 0x39f1c2f4, __VMLINUX_SYMBOL_STR(ida_get_new_above) },
 	{ 0x96aba385, __VMLINUX_SYMBOL_STR(proc_dointvec_jiffies) },
 	{ 0x4f6b400b, __VMLINUX_SYMBOL_STR(_copy_from_user) },
@@ -233,4 +236,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "4659CBA5FBF113E60B3AE27");
+MODULE_INFO(srcversion, "96C6649A3B5992EE080CFB7");
