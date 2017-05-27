@@ -75,7 +75,7 @@ fn parse_interrupts<'a>(content: &'a String) -> Result<ProcInterrupts<'a>, &'sta
 }
 
 fn process_interrupts() -> Result<iron::response::Response, iron::IronError> {
-    let path_str: String = String::from("/proc/interrupts");
+    let mut path_str: String = String::from("/proc/interrupts");
     let r = read_file(path_str);
     if r.is_err() {
         return Ok(Response::with((status::Ok, "file.open error!")));
@@ -85,19 +85,42 @@ fn process_interrupts() -> Result<iron::response::Response, iron::IronError> {
     if r.is_err() {
         return Ok(Response::with((status::Ok, "parse_interrupts error!")));
     }
-    let out = serde_json::to_string(&r.unwrap());
+    let res = JsonResp::<ProcInterrupts> { errno:0, errmsg:String::from(""), data: r.unwrap()};
     let content_type = "application/json".parse::<Mime>().unwrap();
+    let out = serde_json::to_string(&res);
     if out.is_err() {
         return Ok(Response::with((content_type, status::Ok, "tojson error")));
     }
-    return Ok(Response::with((status::Ok, out.unwrap())));
+    return Ok(Response::with((content_type, status::Ok, out.unwrap())));
 
 }
 
+fn process_pid_stat(pid: usize) -> Result<iron::response::Response, iron::IronError> {
+
+    let mut path_str: String = String::new();
+    path_str.push_str(&pid.to_string());
+    path_str.push_str("/");
+    path_str.push_str("stat");
+
+    let r = read_file(path_str);
+    if r.is_err(){
+        return Ok(Response::with((status::Ok, "read_to_string error")));
+    }
+    let s = r.unwrap();
+
+    let v: Vec<&str> = s.split(' ').collect();
+    let content_type = "application/json".parse::<Mime>().unwrap();
+    //Ok(Response::with((content_type, status::Ok, v.join("</br>"))))
+    let stat = ProcPidStat {pid: v[0].parse::<i32>().ok().unwrap(), cmd: v[1].to_string()};
+    let res = JsonResp::<ProcPidStat> { errno:0, errmsg:String::from(""), data: stat};
+    let out = serde_json::to_string(&res);
+    if out.is_err() {
+        return Ok(Response::with((content_type, status::Ok, "tojson error")));
+    }
+    Ok(Response::with((content_type, status::Ok, out.unwrap())))
+}
 
 fn main() {
-    // Read the file contents into a string, returns `io::Result<usize>`
-
     Iron::new(move |req: &mut Request| {
         let mut path_str = String::from("/proc/");
         println!("{:?}", req.get_ref::<Params>());
@@ -110,27 +133,8 @@ fn main() {
             println!("parse int error {}", req.url.path()[0]);
             return Ok(Response::with((status::Ok, "Error")));
         }
+        let pid = req.url.path()[0].parse::<usize>().unwrap();
+        return process_pid_stat(pid);
 
-        path_str.push_str(req.url.path()[0]);
-        path_str.push_str("/");
-        path_str.push_str(req.url.path()[1]);
-
-        let r = read_file(path_str);
-        if r.is_err(){
-            return Ok(Response::with((status::Ok, "read_to_string error")));
-        }
-        let s = r.unwrap();
-
-        let v: Vec<&str> = s.split(' ').collect();
-        //println!("{:?}", v);
-        let content_type = "application/json".parse::<Mime>().unwrap();
-        //Ok(Response::with((content_type, status::Ok, v.join("</br>"))))
-        let stat = ProcPidStat {pid: v[0].parse::<i32>().ok().unwrap(), cmd: v[1].to_string()};
-        let res = JsonResp::<ProcPidStat> { errno:0, errmsg:String::from(""), data: stat};
-        let out = serde_json::to_string(&res);
-        if out.is_err() {
-            return Ok(Response::with((content_type, status::Ok, "tojson error")));
-        }
-        Ok(Response::with((content_type, status::Ok, out.unwrap())))
     }).http("0.0.0.0:3000").unwrap();
 }
